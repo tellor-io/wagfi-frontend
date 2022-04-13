@@ -9,7 +9,8 @@
   color: #262626;
 }
 .Hero__View {
-  padding: 50px 120px 80px 120px;
+  width: 75vw;
+  margin: 0 auto;
 }
 .Hero__View h1 {
   font-size: 60px;

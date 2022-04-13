@@ -6,33 +6,64 @@ import { UserContext } from '../../contexts/User'
 import { GraphContext } from '../../contexts/Graph'
 //Utils
 import { truncateAddr } from '../../utils/helpers'
-import NoData from '../global/NoData'
 
-function PaidTreasuries({ currAddr, signer }) {
+function PaidTreasuries() {
   //Context
-  const treasuryData = useContext(GraphContext)
-  const appData = useContext(UserContext)
+  const graphData = useContext(GraphContext)
+  const user = useContext(UserContext)
   //Component State
   const [paidData, setPaidData] = useState(null)
-
   useEffect(() => {
-    if (!treasuryData.issued || !treasuryData.bought || !treasuryData.paid)
-      return
-    if (treasuryData.paid.length > 0) {
-      let temp
-      if (!currAddr) {
-        temp = treasuryData.paid.filter(
-          (event) => event.investor === appData.currentAddress
+    if (!user.currentUser) return
+    if (!graphData) return
+    let temp
+
+    switch (user.currentUser.chainId) {
+      case 1:
+        temp = graphData.mainnetTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
         )
-      } else {
-        temp = treasuryData.paid.filter((event) => event.investor === currAddr)
-      }
-      temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        break
+      case 3:
+        temp = graphData.ropstenTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
+        )
+        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        break
+      case 4:
+        temp = graphData.rinkebyTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
+        )
+        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        break
+      default:
+        return
     }
+
     return () => {
       setPaidData(null)
     }
-  }, [treasuryData, currAddr, appData.currentAddress])
+  }, [user.currentUser, graphData])
+
+  // useEffect(() => {
+  //   if (!treasuryData.issued || !treasuryData.bought || !treasuryData.paid)
+  //     return
+  //   if (treasuryData.paid.length > 0) {
+  //     let temp
+  //     if (!currAddr) {
+  //       temp = treasuryData.paid.filter(
+  //         (event) => event.investor === appData.currentAddress
+  //       )
+  //     } else {
+  //       temp = treasuryData.paid.filter((event) => event.investor === currAddr)
+  //     }
+  //     temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+  //   }
+  //   return () => {
+  //     setPaidData(null)
+  //   }
+  // }, [treasuryData, currAddr, appData.currentAddress])
 
   //Function Handlers
   // const handleSelect = (treasury) => {
@@ -45,11 +76,7 @@ function PaidTreasuries({ currAddr, signer }) {
     <>
       {paidData ? (
         <div className="AllTables__Container">
-          <h2>{`Treasuries Paid to ${
-            currAddr.length > 0
-              ? truncateAddr(currAddr)
-              : truncateAddr(appData.currentAddress)
-          }`}</h2>
+          <h2>{`Treasuries Paid to ${'POOPOOCACAPEEPEE'}`}</h2>
           <table>
             <thead className="PaidTreasuries__Header">
               <tr>

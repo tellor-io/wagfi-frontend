@@ -26,8 +26,6 @@ function IssuedTreasuries({
   //Component State
   const [issuedData, setIssuedData] = useState(null)
 
-  console.log(user)
-
   useEffect(() => {
     if (
       !graphData.mainnetTreasury ||
@@ -54,7 +52,12 @@ function IssuedTreasuries({
     return () => {
       setIssuedData(null)
     }
-  }, [user.currentUser.chainId])
+  }, [
+    user.currentUser.chainId,
+    graphData.mainnetTreasury,
+    graphData.ropstenTreasury,
+    graphData.rinkebyTreasury,
+  ])
 
   //Function Handlers
   const handleSelect = (treasury) => {

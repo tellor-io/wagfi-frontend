@@ -7,8 +7,6 @@ import { formSchema } from './global/BuyModalSchema'
 import { UserContext } from '../contexts/User'
 import { GraphContext } from '../contexts/Graph'
 import { ModeContext } from '../contexts/Mode'
-//Web3
-import { ethers } from 'ethers'
 //Utils
 import TESTTellorTreasuryABI from '../utils/TESTTellorTreasuryABI.json'
 import TellorTreasuryABI from '../utils/TellorTreasuryABI.json'
@@ -22,7 +20,6 @@ let initialErrorValues = {
 }
 
 function BuyModal({
-  signer,
   buying,
   selected,
   setBuying,
@@ -41,7 +38,6 @@ function BuyModal({
   //Context
   const user = useContext(UserContext)
   const mode = useContext(ModeContext)
-  console.log(user)
 
   //useEffect for comparing values from selected treasury
   //used for form validation
@@ -105,115 +101,122 @@ function BuyModal({
     setErrors(initialErrorValues)
     setBuying(false)
   }
-  // const handleBuy = (event) => {
-  //   if (!appData) return
+  const handleBuy = (event) => {
+    if (!user.currentUser) return
 
-  //   let contract
-  //   let abi
+    let contract
+    let abi
 
-  //   if (appData.chainId === 'Mainnet') {
-  //     abi = TellorTreasuryABI
-  //     contract = new ethers.Contract(
-  //       appData.contractAddress,
-  //       abi,
-  //       Object.keys(signer) > 0 ? signer : appData.signer
-  //     )
+    if (user.currentUser.chainId === 1) {
+      abi = TellorTreasuryABI
+      contract = new user.currentUser.web3.eth.Contract(
+        abi,
+        '0x3b0f3eaEFaAc9f8F7FDe406919ecEb5270fE0607'
+      )
 
-  //     if (event.totalLocked < event.maxAmount) {
-  //       setLoading(true)
-  //       setBuying(false)
-  //       try {
-  //         contract
-  //           .buyTreasury(event.treasuryId, ethers.utils.parseEther(form.amount))
-  //           .then((res) => {
-  //             setLoading(false)
-  //             setTxnHash(res.hash)
-  //             setBought(true)
-  //             setForm(initialFormValues)
-  //             setErrors(initialErrorValues)
-  //           })
-  //           .catch((err) => {
-  //             //console.log("MetaMask Txn Err: ", err);
-  //             setLoading(false)
-  //             setErrMessage(err.message)
-  //           })
-  //       } catch (err) {
-  //         // console.log("ERR::: ", err.message);
-  //         setErrMessage(err.message)
-  //       }
-  //     } else {
-  //       setErrMessage("We're sorry, this treasury is fully bought up.")
-  //     }
-  //   } else if (appData.chainId === 'Rinkeby') {
-  //     abi = TESTTellorTreasuryABI
-  //     contract = new ethers.Contract(
-  //       appData.contractAddress,
-  //       abi,
-  //       Object.keys(signer) > 0 ? signer : appData.signer
-  //     )
+      if (event.totalLocked < event.maxAmount) {
+        setLoading(true)
+        setBuying(false)
+        try {
+          contract.methods
+            .buyTreasury(
+              event.treasuryId,
+              user.currentUser.web3.utils.toWei(form.amount)
+            )
+            .send({ from: user.currentUser.address })
+            .then((res) => {
+              setLoading(false)
+              setTxnHash(res.hash)
+              setBought(true)
+              setForm(initialFormValues)
+              setErrors(initialErrorValues)
+            })
+            .catch((err) => {
+              //console.log("MetaMask Txn Err: ", err);
+              setLoading(false)
+              setErrMessage(err.message)
+            })
+        } catch (err) {
+          console.log('ERR::: ', err)
+          setErrMessage(err.message)
+        }
+      } else {
+        setErrMessage("We're sorry, this treasury is fully bought up.")
+      }
+    } else if (user.currentUser.chainId === 4) {
+      abi = TESTTellorTreasuryABI
+      contract = new user.currentUser.web3.eth.Contract(
+        abi,
+        '0x7d69B996dee32956908f8876cE42bA09808308EA'
+      )
 
-  //     if (event.totalLocked < event.maxAmount) {
-  //       setLoading(true)
-  //       setBuying(false)
-  //       try {
-  //         contract
-  //           .buyTreasury(event.treasuryId, ethers.utils.parseEther(form.amount))
-  //           .then((res) => {
-  //             setLoading(false)
-  //             setTxnHash(res.hash)
-  //             setBought(true)
-  //             setForm(initialFormValues)
-  //             setErrors(initialErrorValues)
-  //           })
-  //           .catch((err) => {
-  //             //console.log("MetaMask Txn Err: ", err);
-  //             setLoading(false)
-  //             setErrMessage(err.message)
-  //           })
-  //       } catch (err) {
-  //         // console.log("ERR::: ", err.message);
-  //         setErrMessage(err.message)
-  //       }
-  //     } else {
-  //       setErrMessage("We're sorry, this treasury is fully bought up.")
-  //     }
-  //   } else if (appData.chainId === 'Ropsten') {
-  //     abi = TESTTellorTreasuryABI
-  //     contract = new ethers.Contract(
-  //       appData.contractAddress,
-  //       abi,
-  //       Object.keys(signer) > 0 ? signer : appData.signer
-  //     )
+      if (event.totalLocked < event.maxAmount) {
+        setLoading(true)
+        setBuying(false)
+        try {
+          contract
+            .buyTreasury(
+              event.treasuryId,
+              user.currentUser.web3.utils.toWei(form.amount)
+            )
+            .send({ from: user.currentUser.address })
+            .then((res) => {
+              setLoading(false)
+              setTxnHash(res.hash)
+              setBought(true)
+              setForm(initialFormValues)
+              setErrors(initialErrorValues)
+            })
+            .catch((err) => {
+              //console.log("MetaMask Txn Err: ", err);
+              setLoading(false)
+              setErrMessage(err.message)
+            })
+        } catch (err) {
+          // console.log("ERR::: ", err.message);
+          setErrMessage(err.message)
+        }
+      } else {
+        setErrMessage("We're sorry, this treasury is fully bought up.")
+      }
+    } else if (user.currentUser.chainId === 3) {
+      abi = TESTTellorTreasuryABI
+      contract = new user.currentUser.web3.eth.Contract(
+        abi,
+        '0xb7C38be763D1eebcBF23F99678507ca4621448A0'
+      )
 
-  //     if (event.totalLocked < event.maxAmount) {
-  //       setLoading(true)
-  //       setBuying(false)
-  //       try {
-  //         contract
-  //           .buyTreasury(event.treasuryId, ethers.utils.parseEther(form.amount))
-  //           .then((res) => {
-  //             setLoading(false)
-  //             setTxnHash(res.hash)
-  //             setBought(true)
-  //             setForm(initialFormValues)
-  //             setErrors(initialErrorValues)
-  //           })
-  //           .catch((err) => {
-  //             //console.log("MetaMask Txn Err: ", err);
-  //             setLoading(false)
-  //             setErrMessage(err.message)
-  //           })
-  //       } catch (err) {
-  //         // console.log("ERR::: ", err.message);
-  //         setErrMessage(err.message)
-  //       }
-  //     } else {
-  //       setErrMessage("We're sorry, this treasury is fully bought up.")
-  //     }
-  //   }
-  // }
-
-  const handleBuy = () => {}
+      if (event.totalLocked < event.maxAmount) {
+        setLoading(true)
+        setBuying(false)
+        try {
+          contract
+            .buyTreasury(
+              event.treasuryId,
+              user.currentUser.web3.utils.toWei(form.amount)
+            )
+            .send({ from: user.currentUser.address })
+            .then((res) => {
+              setLoading(false)
+              setTxnHash(res.hash)
+              setBought(true)
+              setForm(initialFormValues)
+              setErrors(initialErrorValues)
+            })
+            .catch((err) => {
+              //console.log("MetaMask Txn Err: ", err);
+              setLoading(false)
+              setErrMessage(err.message)
+            })
+        } catch (err) {
+          // console.log("ERR::: ", err.message);
+          setErrMessage(err.message)
+        }
+      } else {
+        setErrMessage("We're sorry, this treasury is fully bought up.")
+      }
+    }
+  }
 
   return (
     <div className="BuyModal" style={{ display: buying ? 'flex' : 'none' }}>

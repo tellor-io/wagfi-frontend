@@ -6,44 +6,53 @@ import { UserContext } from '../../contexts/User'
 import { GraphContext } from '../../contexts/Graph'
 //Utils
 import { truncateAddr } from '../../utils/helpers'
-import NoData from '../global/NoData'
 
-function BoughtTreasuries({ currAddr, signer }) {
+function BoughtTreasuries() {
   //Context
-  const treasuryData = useContext(GraphContext)
-  const appData = useContext(UserContext)
+  const graphData = useContext(GraphContext)
+  const user = useContext(UserContext)
   //Component State
   const [boughtData, setBoughtData] = useState(null)
 
   useEffect(() => {
-    if (!treasuryData.issued || !treasuryData.bought || !treasuryData.paid)
-      return
-    if (treasuryData.bought.length > 0) {
-      let temp
-      if (!currAddr) {
-        temp = treasuryData.bought.filter(
-          (event) => event.investor === appData.currentAddress
+    if (!user.currentUser) return
+    if (!graphData) return
+    let temp
+
+    switch (user.currentUser.chainId) {
+      case 1:
+        temp = graphData.mainnetTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
         )
-      } else {
-        temp = treasuryData.bought.filter(
-          (event) => event.investor === currAddr
+        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        break
+      case 3:
+        temp = graphData.ropstenTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
         )
-      }
-      temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        break
+      case 4:
+        temp = graphData.rinkebyTreasury.boughtTreasuries.filter(
+          (event) => event.investor === user.currentUser.address
+        )
+        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        break
+      default:
+        return
     }
+
     return () => {
       setBoughtData(null)
     }
-  }, [treasuryData, currAddr, appData.currentAddress])
+  }, [user.currentUser, graphData])
 
   return (
     <>
       {boughtData ? (
         <div className="AllTables__Container">
           <h2>{`Treasuries Bought by ${
-            currAddr.length > 0
-              ? truncateAddr(currAddr)
-              : truncateAddr(appData.currentAddress)
+            user.currentUser && truncateAddr(user.currentUser.address)
           }`}</h2>
           <table>
             <thead className="BoughtTreasuries__Header">

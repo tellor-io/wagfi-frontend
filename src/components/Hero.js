@@ -112,8 +112,8 @@ function Hero({ currAddr, signer }) {
                   setTxnHash={setTxnHash}
                   setBought={setBought}
                 />
-                <BoughtTreasuries currAddr={currAddr} signer={signer} />
-                <PaidTreasuries currAddr={currAddr} signer={signer} />
+                <BoughtTreasuries />
+                <PaidTreasuries />
               </div>
             ) : (
               <div className="ConnectContainer">
@@ -151,7 +151,6 @@ function Hero({ currAddr, signer }) {
         txnHash={txnHash}
       />
       <BuyModal
-        signer={signer}
         buying={buying}
         selected={selected}
         setBuying={setBuying}
