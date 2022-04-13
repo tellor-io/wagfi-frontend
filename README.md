@@ -1,2 +1,2 @@
-# frontendBoilerplate
-A Nav, EmptyHero and Footer template for quick-starting Tellor Frontends
+# treasuries
+A frontend for interacting with the Tellor Treasuries contract.
