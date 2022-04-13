@@ -1,0 +1,21 @@
+.Global__Button {
+  font-family: 'Inconsolata';
+  background-color: #2dfc9f;
+  border: 2px solid #2dfc9f;
+  border-radius: 25px;
+  width: fit-content;
+  height: auto;
+  padding: 10px 18px;
+  color: #555555;
+}
+.Global__Button:hover {
+  cursor: pointer;
+  background-color: #fafafa;
+}
+.Global__Button:disabled {
+  opacity: 0.4;
+}
+.Global__Button:disabled:hover {
+  cursor: not-allowed;
+  background-color: #2dfc9f;
+}
