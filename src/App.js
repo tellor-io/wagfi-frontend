@@ -12,9 +12,7 @@ import { GraphContext } from './contexts/Graph'
 function App() {
   //Context
   const mode = useContext(ModeContext)
-  const graphData = useContext(GraphContext)
 
-  console.log(graphData)
   return (
     <div className={mode && mode.mode === 'dark' ? 'App' : 'AppLight'}>
       <Nav />
@@ -23,7 +21,7 @@ function App() {
           mode && mode.mode === 'dark' ? 'HeroContainer' : 'HeroContainerLight'
         }
       >
-        <h1>Tellor Treasuries</h1>
+        <Hero />
       </div>
       <Footer />
     </div>

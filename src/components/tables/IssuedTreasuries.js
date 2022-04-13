@@ -3,17 +3,15 @@ import '../../styles/AllTables.css'
 //Contexts
 import { UserContext } from '../../contexts/User'
 import { GraphContext } from '../../contexts/Graph'
+import { ModeContext } from '../../contexts/Mode'
 //Assets
 import RedX from '../../assets/off_close.svg'
 import GreenCheck from '../../assets/circle_check.svg'
 //Utils
 import TESTTellorTreasuryABI from '../../utils/TESTTellorTreasuryABI.json'
 import TellorTreasuryABI from '../../utils/TellorTreasuryABI.json'
-//Web3
-import { ethers } from 'ethers'
 
 function IssuedTreasuries({
-  currAddr,
   setBuying,
   setSelected,
   setErrMessage,
@@ -22,19 +20,41 @@ function IssuedTreasuries({
   setBought,
 }) {
   //Context
-  const treasuryData = useContext(GraphContext)
-  const appData = useContext(UserContext)
+  const graphData = useContext(GraphContext)
+  const user = useContext(UserContext)
+  const mode = useContext(ModeContext)
   //Component State
   const [issuedData, setIssuedData] = useState(null)
 
+  console.log(user)
+
   useEffect(() => {
-    if (!treasuryData.issued || !treasuryData.bought || !treasuryData.paid)
+    if (
+      !graphData.mainnetTreasury ||
+      !graphData.ropstenTreasury ||
+      !graphData.rinkebyTreasury
+    )
       return
-    setIssuedData(treasuryData.issued)
+    if (!user.currentUser.chainId) return
+
+    switch (user.currentUser.chainId) {
+      case 1:
+        setIssuedData(graphData.mainnetTreasury.issuedTreasuries)
+        break
+      case 3:
+        setIssuedData(graphData.ropstenTreasury.issuedTreasuries)
+        break
+      case 4:
+        setIssuedData(graphData.rinkebyTreasury.issuedTreasuries)
+        break
+      default:
+        return
+    }
+
     return () => {
       setIssuedData(null)
     }
-  }, [treasuryData])
+  }, [user.currentUser.chainId])
 
   //Function Handlers
   const handleSelect = (treasury) => {
@@ -48,34 +68,27 @@ function IssuedTreasuries({
 
   const handlePayout = (treasury) => {
     if (!issuedData) return
-    if (!appData) return
+    if (!user.currentUser) return
 
     let contract
     let abi
     // let wasPaid;
 
-    if (appData.chainId === 'Mainnet') {
+    if (user.currentUser.chainId === 1) {
       abi = TellorTreasuryABI
-      contract = new ethers.Contract(
-        appData.contractAddress,
+      contract = new user.currentUser.web3.eth.Contract(
         abi,
-        appData.signer
+        '0x3b0f3eaEFaAc9f8F7FDe406919ecEb5270fE0607'
       )
 
       try {
         contract
-          .wasPaid(
-            treasury.treasuryId,
-            currAddr.length > 0 ? currAddr : appData.currentAddress
-          )
+          .wasPaid(treasury.treasuryId, user.currentUser.address)
           .then((response) => {
             if (!response) {
               setLoading(true)
               contract
-                .payTreasury(
-                  currAddr.length > 0 ? currAddr : appData.currentAddress,
-                  treasury.treasuryId
-                )
+                .payTreasury(user.currentUser.address, treasury.treasuryId)
                 .then((res) => {
                   setLoading(false)
                   setTxnHash(res.hash)
@@ -95,28 +108,55 @@ function IssuedTreasuries({
       } catch (err) {
         setErrMessage(err.message)
       }
-    } else if (appData.chainId === 'Ropsten' || appData.chainId === 'Rinkeby') {
+    } else if (user.currentUser.chainId === 3) {
       abi = TESTTellorTreasuryABI
-      contract = new ethers.Contract(
-        appData.contractAddress,
+      contract = new user.currentUser.web3.eth.Contract(
         abi,
-        appData.signer
+        '0xb7C38be763D1eebcBF23F99678507ca4621448A0'
       )
 
       try {
         contract
-          .wasPaid(
-            treasury.treasuryId,
-            currAddr.length > 0 ? currAddr : appData.currentAddress
-          )
+          .wasPaid(treasury.treasuryId, user.currentUser.address)
           .then((response) => {
             if (!response) {
               setLoading(true)
               contract
-                .payTreasury(
-                  currAddr.length > 0 ? currAddr : appData.currentAddress,
-                  treasury.treasuryId
-                )
+                .payTreasury(user.currentUser.address, treasury.treasuryId)
+                .then((res) => {
+                  setLoading(false)
+                  setTxnHash(res.hash)
+                  setBought(true)
+                })
+                .catch((err) => {
+                  setErrMessage(err.message)
+                  setLoading(false)
+                })
+            } else {
+              setErrMessage('This treasury was already paid out.')
+            }
+          })
+          .catch((err) => {
+            setErrMessage(err.message)
+          })
+      } catch (err) {
+        setErrMessage(err.message)
+      }
+    } else if (user.currentUser.chainId === 4) {
+      abi = TESTTellorTreasuryABI
+      contract = new user.currentUser.web3.eth.Contract(
+        abi,
+        '0x7d69B996dee32956908f8876cE42bA09808308EA'
+      )
+
+      try {
+        contract
+          .wasPaid(treasury.treasuryId, user.currentUser.address)
+          .then((response) => {
+            if (!response) {
+              setLoading(true)
+              contract
+                .payTreasury(user.currentUser.address, treasury.treasuryId)
                 .then((res) => {
                   setLoading(false)
                   setTxnHash(res.hash)
@@ -176,7 +216,11 @@ function IssuedTreasuries({
                 <td>
                   <button
                     onClick={() => handleSelect(treasury)}
-                    className="Global__Button"
+                    className={
+                      mode.mode === 'dark'
+                        ? 'Global__Button'
+                        : 'Global__ButtonLight'
+                    }
                   >
                     {treasury.active
                       ? 'Deposit In This Treasury'

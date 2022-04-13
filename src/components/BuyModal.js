@@ -6,6 +6,7 @@ import { formSchema } from './global/BuyModalSchema'
 //Contexts
 import { UserContext } from '../contexts/User'
 import { GraphContext } from '../contexts/Graph'
+import { ModeContext } from '../contexts/Mode'
 //Web3
 import { ethers } from 'ethers'
 //Utils
@@ -39,6 +40,7 @@ function BuyModal({
   const [errors, setErrors] = useState(initialErrorValues)
   //Context
   const user = useContext(UserContext)
+  const mode = useContext(ModeContext)
   console.log(user)
 
   //useEffect for comparing values from selected treasury
@@ -234,7 +236,9 @@ function BuyModal({
           <h5>{errors.amount}</h5>
           <button
             disabled={buttonDisabled}
-            className="Global__Button"
+            className={
+              mode.mode === 'dark' ? 'Global__ButtonLight' : 'Global__Button'
+            }
             onClick={() => handleBuy(selected)}
           >
             Submit
