@@ -7,6 +7,7 @@
     "node": "^16.14.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.5.0",
@@ -15,14 +16,15 @@
     "@testing-library/user-event": "^13.5.0",
     "@ukstv/jazzicon-react": "^1.0.0",
     "@walletconnect/web3-provider": "^1.7.4",
-    "ethers": "^5.5.4",
+    "ethers": "^5.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-responsive": "^9.0.0-beta.6",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
     "web3": "^1.7.1",
-    "web3modal": "^1.9.5"
+    "web3modal": "^1.9.5",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

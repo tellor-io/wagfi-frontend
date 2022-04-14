@@ -22,7 +22,6 @@
   background-color: #262626;
   margin-bottom: 100px;
   transition: 0.3s;
-  border: 1px solid red;
 }
 
 /* LIGHT MODE STYLES */
@@ -50,5 +49,4 @@
   background-color: #fafafa;
   margin-bottom: 100px;
   transition: 0.3s;
-  border: 1px solid red;
 }

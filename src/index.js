@@ -4,11 +4,14 @@ import './index.css'
 import App from './App'
 import User from './contexts/User'
 import Mode from './contexts/Mode'
+import Graph from './contexts/Graph'
 
 ReactDOM.render(
   <User>
     <Mode>
-      <App />
+      <Graph>
+        <App />
+      </Graph>
     </Mode>
   </User>,
   document.getElementById('root')
