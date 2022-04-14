@@ -154,7 +154,7 @@ function BuyModal({
         setLoading(true)
         setBuying(false)
         try {
-          contract
+          contract.methods
             .buyTreasury(
               event.treasuryId,
               user.currentUser.web3.utils.toWei(form.amount)
@@ -190,7 +190,7 @@ function BuyModal({
         setLoading(true)
         setBuying(false)
         try {
-          contract
+          contract.methods
             .buyTreasury(
               event.treasuryId,
               user.currentUser.web3.utils.toWei(form.amount)
