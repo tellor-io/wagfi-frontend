@@ -25,7 +25,6 @@ function Hero({ currAddr, signer }) {
   //Context
   const user = useContext(UserContext)
   const mode = useContext(ModeContext)
-  console.log('user in Hero', user)
   //Refs
   const ref = React.createRef()
   const ErrModal = React.forwardRef((props, ref) => {

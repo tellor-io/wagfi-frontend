@@ -85,13 +85,15 @@ function IssuedTreasuries({
       )
 
       try {
-        contract
+        contract.methods
           .wasPaid(treasury.treasuryId, user.currentUser.address)
+          .call()
           .then((response) => {
             if (!response) {
               setLoading(true)
-              contract
+              contract.methods
                 .payTreasury(user.currentUser.address, treasury.treasuryId)
+                .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
                   setTxnHash(res.hash)
@@ -119,13 +121,15 @@ function IssuedTreasuries({
       )
 
       try {
-        contract
+        contract.methods
           .wasPaid(treasury.treasuryId, user.currentUser.address)
+          .call()
           .then((response) => {
             if (!response) {
               setLoading(true)
-              contract
+              contract.methods
                 .payTreasury(user.currentUser.address, treasury.treasuryId)
+                .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
                   setTxnHash(res.hash)
@@ -143,6 +147,7 @@ function IssuedTreasuries({
             setErrMessage(err.message)
           })
       } catch (err) {
+        console.log(err)
         setErrMessage(err.message)
       }
     } else if (user.currentUser.chainId === 4) {
@@ -153,13 +158,15 @@ function IssuedTreasuries({
       )
 
       try {
-        contract
+        contract.methods
           .wasPaid(treasury.treasuryId, user.currentUser.address)
+          .call()
           .then((response) => {
             if (!response) {
               setLoading(true)
-              contract
+              contract.methods
                 .payTreasury(user.currentUser.address, treasury.treasuryId)
+                .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
                   setTxnHash(res.hash)

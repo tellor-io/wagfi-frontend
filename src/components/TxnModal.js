@@ -1,16 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/TxnModal.css'
+//Assets
 import { ReactComponent as Close } from '../assets/CloseX.svg'
+//Contexts
+import { ModeContext } from '../contexts/Mode'
+//Utils
 import { truncateAddr } from '../utils/helpers'
 
 function TxnModal({ chainId, address, bought, setBought, txnHash }) {
+  //Context State
+  const mode = useContext(ModeContext)
   const closeModal = () => {
     setBought(false)
   }
 
   return (
     <div className="TxnModal" style={{ display: bought ? 'flex' : 'none' }}>
-      <div className="TxnModal__Content">
+      <div
+        className={
+          mode.mode === 'dark' ? 'TxnModal__ContentLight' : 'TxnModal__Content'
+        }
+      >
         <div className="TxnModal__Exit">
           <Close className="TxnModal__ExitIcon" onClick={closeModal} />
         </div>
@@ -24,13 +34,13 @@ function TxnModal({ chainId, address, bought, setBought, txnHash }) {
           </h1>
           <p>To view your transaction on etherscan, click below:</p>
           {txnHash ? (
-            chainId === 'Mainnet' ? (
+            chainId === 1 ? (
               <a
                 href={`https://etherscan.io/tx/${txnHash}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >{`https://etherscan.io/tx/${txnHash}`}</a>
-            ) : chainId === 'Rinkeby' ? (
+            ) : chainId === 4 ? (
               <a
                 href={`https://rinkeby.etherscan.io/tx/${txnHash}`}
                 target="_blank"

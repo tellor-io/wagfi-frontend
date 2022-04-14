@@ -13,6 +13,7 @@ function PaidTreasuries() {
   const user = useContext(UserContext)
   //Component State
   const [paidData, setPaidData] = useState(null)
+
   useEffect(() => {
     if (!user.currentUser) return
     if (!graphData) return
@@ -20,19 +21,19 @@ function PaidTreasuries() {
 
     switch (user.currentUser.chainId) {
       case 1:
-        temp = graphData.mainnetTreasury.boughtTreasuries.filter(
+        temp = graphData.mainnetTreasury.paidTreasuries.filter(
           (event) => event.investor === user.currentUser.address
         )
         temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 3:
-        temp = graphData.ropstenTreasury.boughtTreasuries.filter(
+        temp = graphData.ropstenTreasury.paidTreasuries.filter(
           (event) => event.investor === user.currentUser.address
         )
         temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 4:
-        temp = graphData.rinkebyTreasury.boughtTreasuries.filter(
+        temp = graphData.rinkebyTreasury.paidTreasuries.filter(
           (event) => event.investor === user.currentUser.address
         )
         temp.length > 0 ? setPaidData(temp) : setPaidData(null)
@@ -46,26 +47,7 @@ function PaidTreasuries() {
     }
   }, [user.currentUser, graphData])
 
-  // useEffect(() => {
-  //   if (!treasuryData.issued || !treasuryData.bought || !treasuryData.paid)
-  //     return
-  //   if (treasuryData.paid.length > 0) {
-  //     let temp
-  //     if (!currAddr) {
-  //       temp = treasuryData.paid.filter(
-  //         (event) => event.investor === appData.currentAddress
-  //       )
-  //     } else {
-  //       temp = treasuryData.paid.filter((event) => event.investor === currAddr)
-  //     }
-  //     temp.length > 0 ? setPaidData(temp) : setPaidData(null)
-  //   }
-  //   return () => {
-  //     setPaidData(null)
-  //   }
-  // }, [treasuryData, currAddr, appData.currentAddress])
-
-  //Function Handlers
+  // Function Handlers
   // const handleSelect = (treasury) => {
   //   console.log(treasury);
   //   // setSelected(treasury);
@@ -76,7 +58,9 @@ function PaidTreasuries() {
     <>
       {paidData ? (
         <div className="AllTables__Container">
-          <h2>{`Treasuries Paid to ${'POOPOOCACAPEEPEE'}`}</h2>
+          <h2>{`Treasuries Paid to ${
+            user.currentUser && truncateAddr(user.currentUser.address)
+          }`}</h2>
           <table>
             <thead className="PaidTreasuries__Header">
               <tr>
