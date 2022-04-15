@@ -14,8 +14,6 @@ function TxnModal({ chainId, address, bought, setBought, txnHash }) {
     setBought(false)
   }
 
-  console.log(chainId)
-  console.log(txnHash)
   return (
     <div className="TxnModal" style={{ display: bought ? 'flex' : 'none' }}>
       <div

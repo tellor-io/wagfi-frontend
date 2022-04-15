@@ -126,7 +126,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)
@@ -162,7 +162,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)
@@ -198,7 +198,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)
