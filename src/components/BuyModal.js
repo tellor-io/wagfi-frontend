@@ -5,7 +5,6 @@ import * as yup from 'yup'
 import { formSchema } from './global/BuyModalSchema'
 //Contexts
 import { UserContext } from '../contexts/User'
-import { GraphContext } from '../contexts/Graph'
 import { ModeContext } from '../contexts/Mode'
 //Utils
 import TESTTellorTreasuryABI from '../utils/TESTTellorTreasuryABI.json'

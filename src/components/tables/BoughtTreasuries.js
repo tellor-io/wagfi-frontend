@@ -26,7 +26,7 @@ function BoughtTreasuries() {
           graphData.mainnetTreasury.boughtTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       case 3:
         temp =
@@ -34,7 +34,7 @@ function BoughtTreasuries() {
           graphData.ropstenTreasury.boughtTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       case 4:
         temp =
@@ -42,7 +42,7 @@ function BoughtTreasuries() {
           graphData.rinkebyTreasury.boughtTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       default:
         return

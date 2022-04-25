@@ -26,7 +26,7 @@ function PaidTreasuries() {
           graphData.mainnetTreasury.paidTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 3:
         temp =
@@ -34,7 +34,7 @@ function PaidTreasuries() {
           graphData.ropstenTreasury.paidTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 4:
         temp =
@@ -42,7 +42,7 @@ function PaidTreasuries() {
           graphData.rinkebyTreasury.paidTreasuries.filter(
             (event) => event.investor === user.currentUser.address
           )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       default:
         return
