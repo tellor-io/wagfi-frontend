@@ -70,8 +70,7 @@ function Hero({ currAddr, signer }) {
       <div className="Hero__View">
         <h1>Tellor Treasuries</h1>
         <h3>
-          Staking the Q2 2022 Treasury is now live! Review the details of our
-          inaugural treasury offering, or{' '}
+          Review the details of our treasury offering, or{' '}
           <a
             href={
               etherscanLink
