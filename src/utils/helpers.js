@@ -193,28 +193,25 @@ export const decodingMiddleware = (events) => {
     })
   events.treasuryPurchasedEntities &&
     events.treasuryPurchasedEntities.forEach((entity) => {
-      if (entity.network === 'ropsten') {
-        let clone = JSON.parse(JSON.stringify(entity))
-        //console.log('clone', clone)
-        clone.durationSeconds = clone.duration
-        clone.duration = timeConverter(clone.duration)
-        // clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
-        // clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
-        // clone.rate = `${clone.rate / 100}%`
-        clone.payoutDate = timerHelper(clone.dateStarted, clone.durationSeconds)
-        clone.treasuryName = nameHelper(clone.timestamp)
-        clone.amountBought = `${ethers.utils.formatEther(
-          clone.amountBought
-        )} TRB`
-        clone.investor = ethers.utils.getAddress(clone.investor)
-        clone.active = activeHelper(clone.timestamp, clone.durationSeconds)
-        clone.dateBought = payoutTimerHelper(clone.timestamp)
-        boughtArray.push(clone)
-      }
+      let clone = JSON.parse(JSON.stringify(entity))
+      //console.log('clone', clone)
+      clone.durationSeconds = clone.duration
+      clone.duration = timeConverter(clone.duration)
+      clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
+      clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
+      clone.rate = `${clone.rate / 100}%`
+      clone.payoutDate = timerHelper(clone.dateStarted, clone.durationSeconds)
+      clone.treasuryName = nameHelper(clone.timestamp)
+      clone.amountBought = `${ethers.utils.formatEther(clone.amountBought)} TRB`
+      clone.investor = ethers.utils.getAddress(clone.investor)
+      clone.active = activeHelper(clone.timestamp, clone.durationSeconds)
+      clone.dateBought = payoutTimerHelper(clone.timestamp)
+      boughtArray.push(clone)
     })
   events.treasuryPaidEntities &&
     events.treasuryPaidEntities.forEach((entity) => {
       let clone = JSON.parse(JSON.stringify(entity))
+      // console.log('clone', clone)
       clone.duration = timeConverter(clone.duration)
       clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
       clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
