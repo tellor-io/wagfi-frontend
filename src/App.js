@@ -7,7 +7,6 @@ import Hero from './components/Hero'
 import './App.css'
 //Context
 import { ModeContext } from './contexts/Mode'
-import { GraphContext } from './contexts/Graph'
 
 function App() {
   //Context

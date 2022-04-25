@@ -21,22 +21,28 @@ function PaidTreasuries() {
 
     switch (user.currentUser.chainId) {
       case 1:
-        temp = graphData.mainnetTreasury.paidTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp =
+          graphData.mainnetTreasury &&
+          graphData.mainnetTreasury.paidTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 3:
-        temp = graphData.ropstenTreasury.paidTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp =
+          graphData.ropstenTreasury &&
+          graphData.ropstenTreasury.paidTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       case 4:
-        temp = graphData.rinkebyTreasury.paidTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setPaidData(temp) : setPaidData(null)
+        temp =
+          graphData.rinkebyTreasury &&
+          graphData.rinkebyTreasury.paidTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setPaidData(temp) : setPaidData(null)
         break
       default:
         return

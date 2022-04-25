@@ -33,31 +33,33 @@ const nameHelper = (timestamp) => {
   let april12023 = 1680307200
   let july12023 = 1688169600
   let october12023 = 1696118400
-  let january12024 = 1704067200
 
   switch (true) {
-    case january12022 < timestamp < april12022:
-      return 'Q1 2022 Treasury'
-    case april12022 < timestamp < july12022:
-      return 'Q2 2022 Treasury'
-    case july12022 < timestamp < october12022:
-      return 'Q3 2022 Treasury'
-    case october12022 < timestamp < january12023:
-      return 'Q4 2022 Treasury'
-    case january12023 < timestamp < april12023:
-      return 'Q1 2023 Treasury'
-    case april12023 < timestamp < july12023:
-      return 'Q2 2023 Treasury'
-    case july12023 < timestamp < october12023:
-      return 'Q3 2023 Treasury'
-    case october12023 < timestamp < january12024:
+    case timestamp > october12023:
       return 'Q4 2023 Treasury'
+    case timestamp > july12023:
+      return 'Q3 2023 Treasury'
+    case timestamp > april12023:
+      return 'Q2 2023 Treasury'
+    case timestamp > january12023:
+      return 'Q1 2023 Treasury'
+    case timestamp > october12022:
+      return 'Q4 2022 Treasury'
+    case timestamp > july12022:
+      return 'Q3 2022 Treasury'
+    case timestamp > april12022:
+      return 'Q2 2022 Treasury'
+    case timestamp > january12022:
+      return 'Q1 2022 Treasury'
+
     default:
       return 'Upgrade nameHelper Constraints'
   }
 }
 
 const timerHelper = (startDate, duration) => {
+  // console.log('startDate', startDate)
+  // console.log('duration', duration)
   const totalTime = parseInt(startDate) + parseInt(duration)
   const date = new Date(totalTime * 1000)
   const dateArr = date.toString().split(' ')
@@ -65,6 +67,7 @@ const timerHelper = (startDate, duration) => {
 }
 
 const payoutTimerHelper = (eventDate) => {
+  // console.log('eventDate', eventDate)
   const date = new Date(eventDate * 1000)
   const dateArr = date.toString().split(' ')
   return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]} @ ${dateArr[4]}`
@@ -180,11 +183,8 @@ export const decodingMiddleware = (events) => {
       clone.durationSeconds = clone.duration
       clone.duration = timeConverter(clone.duration)
       clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
-      // CHANGE THIS BACK BEFORE FINISHING
-      // clone.totalLocked = `${ethers.utils.formatEther(
-      //   clone.totalLocked
-      // )} TRB`;
-      clone.totalLocked = '0 TRB'
+      clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
+      // clone.totalLocked = '0 TRB'
       clone.rate = `${clone.rate / 100}%`
       clone.treasuryName = nameHelper(clone.dateStarted)
       clone.payoutDate = timerHelper(clone.dateStarted, clone.durationSeconds)
@@ -193,19 +193,24 @@ export const decodingMiddleware = (events) => {
     })
   events.treasuryPurchasedEntities &&
     events.treasuryPurchasedEntities.forEach((entity) => {
-      let clone = JSON.parse(JSON.stringify(entity))
-      clone.durationSeconds = clone.duration
-      clone.duration = timeConverter(clone.duration)
-      clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
-      clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
-      clone.rate = `${clone.rate / 100}%`
-      clone.treasuryName = nameHelper(clone.dateStarted)
-      clone.amountBought = `${ethers.utils.formatEther(clone.amountBought)} TRB`
-      clone.investor = ethers.utils.getAddress(clone.investor)
-      clone.payoutDate = timerHelper(clone.dateStarted, clone.durationSeconds)
-      clone.active = activeHelper(clone.dateStarted, clone.durationSeconds)
-      clone.dateBought = payoutTimerHelper(clone.timestamp)
-      boughtArray.push(clone)
+      if (entity.network === 'ropsten') {
+        let clone = JSON.parse(JSON.stringify(entity))
+        //console.log('clone', clone)
+        clone.durationSeconds = clone.duration
+        clone.duration = timeConverter(clone.duration)
+        // clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
+        // clone.totalLocked = `${ethers.utils.formatEther(clone.totalLocked)} TRB`
+        // clone.rate = `${clone.rate / 100}%`
+        clone.payoutDate = timerHelper(clone.dateStarted, clone.durationSeconds)
+        clone.treasuryName = nameHelper(clone.timestamp)
+        clone.amountBought = `${ethers.utils.formatEther(
+          clone.amountBought
+        )} TRB`
+        clone.investor = ethers.utils.getAddress(clone.investor)
+        clone.active = activeHelper(clone.timestamp, clone.durationSeconds)
+        clone.dateBought = payoutTimerHelper(clone.timestamp)
+        boughtArray.push(clone)
+      }
     })
   events.treasuryPaidEntities &&
     events.treasuryPaidEntities.forEach((entity) => {

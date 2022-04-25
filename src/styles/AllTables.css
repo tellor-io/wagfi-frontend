@@ -1,6 +1,7 @@
 .AllTables__Container {
   width: 75vw;
   margin-bottom: 50px;
+  transition: 0.3s;
 }
 .AllTables__Container h2 {
   text-align: center;
@@ -10,6 +11,7 @@
 table {
   width: 100%;
   height: auto;
+  transition: 0.3s;
 }
 
 /*   ISSUED TREASURIES   */

@@ -96,7 +96,7 @@ function IssuedTreasuries({
                 .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
-                  setTxnHash(res.hash)
+                  setTxnHash(res.transactionHash)
                   setBought(true)
                 })
                 .catch((err) => {
@@ -132,7 +132,7 @@ function IssuedTreasuries({
                 .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
-                  setTxnHash(res.hash)
+                  setTxnHash(res.transactionHash)
                   setBought(true)
                 })
                 .catch((err) => {
@@ -169,7 +169,7 @@ function IssuedTreasuries({
                 .send({ from: user.currentUser.address })
                 .then((res) => {
                   setLoading(false)
-                  setTxnHash(res.hash)
+                  setTxnHash(res.transactionHash)
                   setBought(true)
                 })
                 .catch((err) => {

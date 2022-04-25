@@ -5,7 +5,6 @@ import * as yup from 'yup'
 import { formSchema } from './global/BuyModalSchema'
 //Contexts
 import { UserContext } from '../contexts/User'
-import { GraphContext } from '../contexts/Graph'
 import { ModeContext } from '../contexts/Mode'
 //Utils
 import TESTTellorTreasuryABI from '../utils/TESTTellorTreasuryABI.json'
@@ -126,7 +125,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)
@@ -154,7 +153,7 @@ function BuyModal({
         setLoading(true)
         setBuying(false)
         try {
-          contract
+          contract.methods
             .buyTreasury(
               event.treasuryId,
               user.currentUser.web3.utils.toWei(form.amount)
@@ -162,7 +161,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)
@@ -190,7 +189,7 @@ function BuyModal({
         setLoading(true)
         setBuying(false)
         try {
-          contract
+          contract.methods
             .buyTreasury(
               event.treasuryId,
               user.currentUser.web3.utils.toWei(form.amount)
@@ -198,7 +197,7 @@ function BuyModal({
             .send({ from: user.currentUser.address })
             .then((res) => {
               setLoading(false)
-              setTxnHash(res.hash)
+              setTxnHash(res.transactionHash)
               setBought(true)
               setForm(initialFormValues)
               setErrors(initialErrorValues)

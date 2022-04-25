@@ -21,22 +21,28 @@ function BoughtTreasuries() {
 
     switch (user.currentUser.chainId) {
       case 1:
-        temp = graphData.mainnetTreasury.boughtTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp =
+          graphData.mainnetTreasury &&
+          graphData.mainnetTreasury.boughtTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       case 3:
-        temp = graphData.ropstenTreasury.boughtTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp =
+          graphData.ropstenTreasury &&
+          graphData.ropstenTreasury.boughtTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       case 4:
-        temp = graphData.rinkebyTreasury.boughtTreasuries.filter(
-          (event) => event.investor === user.currentUser.address
-        )
-        temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
+        temp =
+          graphData.rinkebyTreasury &&
+          graphData.rinkebyTreasury.boughtTreasuries.filter(
+            (event) => event.investor === user.currentUser.address
+          )
+        temp && temp.length > 0 ? setBoughtData(temp) : setBoughtData(null)
         break
       default:
         return

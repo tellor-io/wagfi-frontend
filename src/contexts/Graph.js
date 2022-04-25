@@ -49,6 +49,15 @@ const Graph = ({ children }) => {
   //Mainnet
   useEffect(() => {
     if (!mainnet.data) return
+    mainnet.data.treasuryIssuedEntities.forEach((entity) => {
+      entity.network = 'mainnet'
+    })
+    mainnet.data.treasuryPaidEntities.forEach((entity) => {
+      entity.network = 'mainnet'
+    })
+    mainnet.data.treasuryPurchasedEntities.forEach((entity) => {
+      entity.network = 'mainnet'
+    })
     let filtered = decodingMiddleware(mainnet.data)
     setMainnetTreasury(filtered)
 
@@ -59,6 +68,15 @@ const Graph = ({ children }) => {
   //Ropsten
   useEffect(() => {
     if (!ropsten.data) return
+    ropsten.data.treasuryIssuedEntities.forEach((entity) => {
+      entity.network = 'ropsten'
+    })
+    ropsten.data.treasuryPaidEntities.forEach((entity) => {
+      entity.network = 'ropsten'
+    })
+    ropsten.data.treasuryPurchasedEntities.forEach((entity) => {
+      entity.network = 'ropsten'
+    })
     let filtered = decodingMiddleware(ropsten.data)
     setRopstenTreasury(filtered)
 
@@ -69,6 +87,15 @@ const Graph = ({ children }) => {
   //Rinkeby
   useEffect(() => {
     if (!rinkeby.data) return
+    rinkeby.data.treasuryIssuedEntities.forEach((entity) => {
+      entity.network = 'rinkeby'
+    })
+    rinkeby.data.treasuryPaidEntities.forEach((entity) => {
+      entity.network = 'rinkeby'
+    })
+    rinkeby.data.treasuryPurchasedEntities.forEach((entity) => {
+      entity.network = 'rinkeby'
+    })
     let filtered = decodingMiddleware(rinkeby.data)
     setRinkebyTreasury(filtered)
 
