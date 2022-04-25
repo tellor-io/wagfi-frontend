@@ -58,8 +58,8 @@ const nameHelper = (timestamp) => {
 }
 
 const timerHelper = (startDate, duration) => {
-  console.log('startDate', startDate)
-  console.log('duration', duration)
+  // console.log('startDate', startDate)
+  // console.log('duration', duration)
   const totalTime = parseInt(startDate) + parseInt(duration)
   const date = new Date(totalTime * 1000)
   const dateArr = date.toString().split(' ')
@@ -195,7 +195,7 @@ export const decodingMiddleware = (events) => {
     events.treasuryPurchasedEntities.forEach((entity) => {
       if (entity.network === 'ropsten') {
         let clone = JSON.parse(JSON.stringify(entity))
-        console.log('clone', clone)
+        //console.log('clone', clone)
         clone.durationSeconds = clone.duration
         clone.duration = timeConverter(clone.duration)
         // clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
