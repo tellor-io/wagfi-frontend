@@ -84,10 +84,12 @@
 
 * [React](https://reactjs.org/)
 * [The Graph](https://thegraph.com/docs/en/)
+* [Apollo](https://www.apollographql.com/docs/react/)
 * [web3](https://web3js.readthedocs.io/en/v1.7.3/)
 * [ethers.js](https://docs.ethers.io/v5/)
 * [jazzicon-react](https://www.npmjs.com/package/@ukstv/jazzicon-react)
 * [Material UI](https://mui.com/material-ui/getting-started/installation/)
+* [yup](https://www.npmjs.com/package/yup)
 
 <!-- GETTING STARTED -->
 ## Getting Started
