@@ -37,7 +37,7 @@
   <h2 align="center">Tellor Treasuries</h2>
 
   <p align="center">
-    This project is a GitHub template used to quickly start up Tellor Frontends. To add more features so all Tellor web3 apps can share the functionality, click on 'Request Feature' below and be sure to detail your specs. 
+    This project is a user interface that makes it easy for staked community members to interact with the Tellor Treasury Solidity contract. After a community vote has approved the parameters of the treasury, (maxAmount, rate, duration, etc.) users can login with their wallet via MetaMask or Walletconnect and see the treasuries currently available to desposit TRB, as well as withdraw their deposits from previous treasuries. 
     <br />
     <br />
     <a href="https://github.com/tellor-io/treasuries/issues">Report Bug</a>
@@ -202,4 +202,5 @@ Tellor.io
 [issues-url]: https://github.com/tellor-io/treasuries/issues
 [license-shield]: https://img.shields.io/github/license/tellor-io/treasuries.svg?style=for-the-badge
 [license-url]: https://github.com/tellor-io/treasuries/blob/main/LICENSE.txt
-[screenshot]: https://user-images.githubusercontent.com/21370350/165222959-8581c860-1bf0-425e-aa05-500c530a2567.png
+[screenshot]: https://user-images.githubusercontent.com/21370350/165330073-d4482d00-beca-4376-99de-498c15a30cfd.png
+
