@@ -9,15 +9,15 @@ export const GraphContext = createContext()
 
 //Apollo Clients
 let clientMainnet = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/joshuasamaniego/treasury-mainh',
+  uri: 'https://api.thegraph.com/subgraphs/name/tellor-io/tellortreasuriesmainhgraph',
   cache: new InMemoryCache(),
 })
 let clientRopsten = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/joshuasamaniego/treasury-roph',
+  uri: 'https://api.thegraph.com/subgraphs/name/tellor-io/tellortreasuriesrophgraph',
   cache: new InMemoryCache(),
 })
 let clientRinkeby = new ApolloClient({
-  uri: 'https://api.thegraph.com/subgraphs/name/joshuasamaniego/treasury-rinkh',
+  uri: 'https://api.thegraph.com/subgraphs/name/tellor-io/tellortreasuriesrinkhgraph',
   cache: new InMemoryCache(),
 })
 
