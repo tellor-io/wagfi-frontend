@@ -66,7 +66,6 @@ function BoughtTreasuries() {
                 <th>Treasury</th>
                 <th>Amount Staked</th>
                 <th>Date of Stake</th>
-                <th>Date of Payout </th>
               </tr>
             </thead>
             <tbody className="BoughtTreasuries__Body">
@@ -76,7 +75,6 @@ function BoughtTreasuries() {
                     <td>{treasury.treasuryName}</td>
                     <td>{treasury.amountBought}</td>
                     <td>{treasury.dateBought}</td>
-                    <td>{treasury.payoutDate}</td>
                   </tr>
                 ))}
             </tbody>

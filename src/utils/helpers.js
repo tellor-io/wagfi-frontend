@@ -194,7 +194,6 @@ export const decodingMiddleware = (events) => {
   events.treasuryPurchasedEntities &&
     events.treasuryPurchasedEntities.forEach((entity) => {
       let clone = JSON.parse(JSON.stringify(entity))
-      //console.log('clone', clone)
       clone.durationSeconds = clone.duration
       clone.duration = timeConverter(clone.duration)
       clone.maxAmount = `${ethers.utils.formatEther(clone.maxAmount)} TRB`
