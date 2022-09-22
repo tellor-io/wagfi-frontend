@@ -79,7 +79,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][screenshot]](https://github.com/tellor-io/wagfi-frontend)
+[![Product Name Screen Shot]<img width="1118" alt="Screen Shot 2022-09-22 at 11 07 09 AM" src="https://user-images.githubusercontent.com/39592448/191785207-9352c0c2-0e44-4ba7-86c5-cca1b7c0070a.png">
+](https://github.com/tellor-io/wagfi-frontend)
 
 ### Built With
 
