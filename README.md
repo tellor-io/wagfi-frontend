@@ -30,19 +30,20 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/tellor-io/treasuries">
+  <a href="https://github.com/tellor-io/wagfi-frontend">
     <img src="/public/Tellor_TRB.svg" alt="Logo" width="80" height="80">
   </a>
 
-  <h2 align="center">Tellor Treasuries</h2>
+  <h2 align="center">WagFi</h2>
 
   <p align="center">
-    This project is a user interface that makes it easy for staked community members to interact with the Tellor Treasury Solidity contract. After a community vote has approved the parameters of the treasury, (maxAmount, rate, duration, etc.) users can login with their wallet via MetaMask or Walletconnect and see the treasuries currently available to desposit TRB, as well as withdraw their deposits from previous treasuries. 
+    This project is a user interface that makes it easy for Tellor's Dollar Auction Solidity contract. Anyone can make bids in any currency, based on Tellor price of asset Or they can add to the pool -which extends time by 3 days. Everyone who bids gets one “point” with a payout at end of all money based on “points”. There will be a 10% min on extensions, & 1$ increments for bids.
+ 
     <br />
     <br />
-    <a href="https://github.com/tellor-io/treasuries/issues">Report Bug</a>
+    <a href="https://github.com/tellor-io/wagfi-frontend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/tellor-io/treasuries/issues">Request Feature</a>
+    <a href="https://github.com/tellor-io/wagfi-frontend/issues">Request Feature</a>
   </p>
 </p>
 
@@ -78,7 +79,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][screenshot]](https://github.com/tellor-io/treasuries)
+[![Product Name Screen Shot][screenshot]](https://github.com/tellor-io/wagfi-frontend)
 
 ### Built With
 
@@ -116,7 +117,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo in your preferred directory
    ```sh
-   git clone https://github.com/tellor-io/treasuries.git
+   git clone https://github.com/tellor-io/wagfi-frontend.git
    ```
 2. Install NPM packages
    ```sh
@@ -138,7 +139,7 @@ To get a local copy up and running follow these simple steps.
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/tellor-io/treasuries/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/tellor-io/wagfi-frontend/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -174,15 +175,15 @@ Tellor.io
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/tellor-io/treasuries.svg?style=for-the-badge
-[contributors-url]: https://github.com/tellor-io/treasuries/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/tellor-io/treasuries.svg?style=for-the-badge
-[forks-url]: https://github.com/tellor-io/treasuries/network/members
-[stars-shield]: https://img.shields.io/github/stars/tellor-io/treasuries.svg?style=for-the-badge
-[stars-url]: https://github.com/tellor-io/treasuries/stargazers
-[issues-shield]: https://img.shields.io/github/issues/tellor-io/treasuries.svg?style=for-the-badge
-[issues-url]: https://github.com/tellor-io/treasuries/issues
-[license-shield]: https://img.shields.io/github/license/tellor-io/treasuries.svg?style=for-the-badge
-[license-url]: https://github.com/tellor-io/treasuries/blob/main/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/tellor-io/wagfi-frontend.svg?style=for-the-badge
+[contributors-url]: https://github.com/tellor-io/wagfi-frontend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/tellor-io/wagfi-frontend.svg?style=for-the-badge
+[forks-url]: https://github.com/tellor-io/wagfi-frontend/network/members
+[stars-shield]: https://img.shields.io/github/stars/tellor-io/wagfi-frontend.svg?style=for-the-badge
+[stars-url]: https://github.com/tellor-io/wagfi-frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/tellor-io/wagfi-frontend.svg?style=for-the-badge
+[issues-url]: https://github.com/tellor-io/wagfi-frontend/issues
+[license-shield]: https://img.shields.io/github/license/tellor-io/wagfi-frontend.svg?style=for-the-badge
+[license-url]: https://github.com/tellor-io/wagfi-frontend/blob/main/LICENSE.txt
 [screenshot]: https://user-images.githubusercontent.com/21370350/165330073-d4482d00-beca-4376-99de-498c15a30cfd.png
 
